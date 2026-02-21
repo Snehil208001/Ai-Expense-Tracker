@@ -16,15 +16,11 @@ Railway offers $5/month free credit—no credit card required for trial.
 
 1. In your project → **+ New** → **Database** → **PostgreSQL**
 2. Railway creates a database service (e.g. `expense-tracker-db`)
-3. **Link DATABASE_URL to your backend:**
-   - Click your **Ai-Expense-Tracker** (backend) service
-   - Go to **Variables** tab
-   - Click **+ New Variable** → **Add a Reference**
-   - Select your **PostgreSQL** database service
-   - Choose **`DATABASE_URL`** from the dropdown
-   - Save
-
-   If "Add Reference" is not available: Click the database service → **Connect** → copy the `DATABASE_URL` → paste it as a variable in your backend service.
+3. **Add DATABASE_URL to your backend** (see [RAILWAY_SETUP.md](./RAILWAY_SETUP.md) for details):
+   - Click **Ai-Expense-Tracker** → **Variables**
+   - Add variable: `DATABASE_URL` = `${{expense-tracker-db.DATABASE_URL}}`  
+     (replace `expense-tracker-db` with your PostgreSQL service name)
+   - Or use **Add Reference** → select PostgreSQL service → choose `DATABASE_URL`
 
 ### 3. Add Other Variables
 
