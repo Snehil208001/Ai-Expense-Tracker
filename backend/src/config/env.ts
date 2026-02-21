@@ -17,7 +17,8 @@ export type Env = z.infer<typeof envSchema>;
 export function loadEnv(): Env {
   const parsed = envSchema.safeParse(process.env);
   if (!parsed.success) {
-    console.error("❌ Invalid environment variables:", parsed.error.flatten());
+    console.error("❌ Invalid environment variables:", JSON.stringify(parsed.error.flatten(), null, 2));
+    console.error("❌ Required: DATABASE_URL (valid URL), JWT_SECRET (16+ chars)");
     process.exit(1);
   }
   return parsed.data;
