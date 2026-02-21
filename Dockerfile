@@ -22,6 +22,7 @@ RUN mkdir -p uploads
 
 # Use startup script (env logging, migrations, then server)
 COPY backend/start.sh ./
+COPY backend/server-minimal.js ./
 RUN chmod +x start.sh
 
 CMD ["./start.sh"]
