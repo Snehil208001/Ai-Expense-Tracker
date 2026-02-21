@@ -20,6 +20,8 @@ COPY backend/src ./src/
 RUN npm run build
 RUN mkdir -p uploads
 
+EXPOSE 3000
+
 # Use startup script (env logging, migrations, then server)
 COPY backend/start.sh ./
 COPY backend/server-minimal.js ./

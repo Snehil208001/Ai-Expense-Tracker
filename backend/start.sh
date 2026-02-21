@@ -13,5 +13,4 @@ echo "JWT_SECRET set: $(test -n "$JWT_SECRET" && echo yes || echo NO)"
 # Run migrations then start
 npx prisma migrate deploy
 echo "Migrations done, starting Node server on 0.0.0.0:$PORT..."
-# TEMP: Use minimal server to verify Railway port/routing. If this works, switch back to dist/index.js
-exec node server-minimal.js
+exec node dist/index.js

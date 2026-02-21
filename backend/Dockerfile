@@ -26,6 +26,9 @@ RUN npm run build
 # Create uploads dir
 RUN mkdir -p uploads
 
+# Expose port (helps some platforms detect it)
+EXPOSE 3000
+
 # Copy and use startup script (helps debug env on Railway)
 COPY start.sh ./
 RUN chmod +x start.sh

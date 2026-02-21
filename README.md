@@ -53,6 +53,7 @@ npx expo start
 | Platform | Free tier | Notes |
 |----------|-----------|-------|
 | [Railway](https://railway.app) | $5 credit/mo | No card for trial. See [DEPLOY_RAILWAY.md](DEPLOY_RAILWAY.md) |
+| [Koyeb](https://koyeb.com) | Free tier | No card required. See [DEPLOY_KOYEB.md](DEPLOY_KOYEB.md) |
 | [Fly.io](https://fly.io) | Free tier | Requires payment method. See [FLY_DEPLOY.md](FLY_DEPLOY.md) |
 | [Render](https://render.com) | Free tier | See [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |
 
