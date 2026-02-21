@@ -66,3 +66,4 @@ After redeploy, the logs should show Prisma connecting instead of "empty string"
   - `NODE_ENV` = `production` (optional; Railway may set it)
 - Railway sets `PORT` automatically—**do not override it**
 - **Networking:** expense-tracker-api → **Settings** → **Networking** → ensure **Target Port** matches your app (default: `3000`, or leave blank to use Railway's `PORT`)
+- **Set PORT=3000:** In **Variables**, add `PORT` = `3000` to force the app to listen on 3000. Railway may default to 8080; if target port doesn't match, you get 502.

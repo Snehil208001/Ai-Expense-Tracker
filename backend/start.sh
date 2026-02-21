@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-# Railway sets PORT; default 3000
+# Railway may use 8080; we default to 3000. Set PORT=3000 in Railway Variables to match.
 export PORT="${PORT:-3000}"
 export NODE_ENV="${NODE_ENV:-production}"
 
