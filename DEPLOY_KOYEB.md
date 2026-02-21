@@ -2,7 +2,9 @@
 
 Koyeb offers a free tier with 1 web service. No credit card required.
 
-## Steps
+**→ For detailed steps, see [DEPLOY_STEP_BY_STEP.md](DEPLOY_STEP_BY_STEP.md)**
+
+## Quick Steps
 
 ### 1. Create Account
 - Go to [koyeb.com](https://www.koyeb.com) → Sign up (GitHub)
