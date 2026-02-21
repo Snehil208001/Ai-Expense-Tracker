@@ -24,13 +24,11 @@ Railway offers $5/month free credit—no credit card required for trial.
    - `JWT_SECRET` = any string 16+ chars (e.g. `my-super-secret-key-12345`)
    - `GOOGLE_GEMINI_API_KEY` = your [Gemini key](https://aistudio.google.com/apikey) (optional)
 
-### 4. Build Settings (if build fails)
+### 4. Build Settings
 
-Railway uses the **Dockerfile** in `backend/` when Root Directory is set. If build fails:
-
-- **Settings** → **Build** → ensure **Root Directory** = `backend`
-- Or set **Build Command**: `npm install && npx prisma generate && npm run build`
-- **Start Command**: `npx prisma migrate deploy && node dist/index.js`
+- **Root Directory** = `backend` (required)
+- **Do NOT set a custom Build Command** – Railway uses the Dockerfile which has Node.js
+- If you see "npm: not found", remove any Build Command override in Settings → Build
 
 ### 5. Deploy & Get URL
 
