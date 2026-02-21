@@ -1,0 +1,16 @@
+export const darkColors = {
+  primary: '#818CF8',
+  primaryLight: '#A5B4FC',
+  accent: '#34D399',
+  danger: '#F87171',
+  background: '#0F172A',
+  backgroundCard: '#1E293B',
+  surface: '#334155',
+  textPrimary: '#F8FAFC',
+  textSecondary: '#CBD5E1',
+  textMuted: '#94A3B8',
+  border: '#334155',
+  borderLight: '#1E293B',
+  income: '#34D399',
+  expense: '#F87171',
+} as const;

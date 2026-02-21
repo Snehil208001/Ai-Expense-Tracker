@@ -1,0 +1,137 @@
+// AI Expense Tracker SaaS - Prisma Schema
+// Multi-tenant: shared DB with tenant_id
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ TENANT ============
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users User[]
+}
+
+// ============ USER ============
+model User {
+  id            String    @id @default(cuid())
+  tenantId      String
+  email         String
+  passwordHash  String?
+  name          String?
+  avatar        String?
+  currency      String    @default("USD")
+  monthlyBudget Decimal? @db.Decimal(12, 2)
+  emailVerified Boolean   @default(false)
+  googleId      String?   @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([email])
+}
+
+// ============ CATEGORY (tenant-scoped) ============
+model Category {
+  id        String   @id @default(cuid())
+  tenantId  String
+  name      String
+  icon      String?
+  color     String?
+  type      String   @default("expense") // expense | income
+  isSystem  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+}
+
+// ============ EXPENSE (Phase 2) ============
+model Expense {
+  id          String    @id @default(cuid())
+  tenantId    String
+  userId      String
+  amount      Decimal   @db.Decimal(12, 2)
+  currency    String    @default("USD")
+  categoryId  String?
+  description String?
+  date        DateTime
+  isRecurring Boolean   @default(false)
+  receiptId   String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([tenantId])
+  @@index([userId])
+  @@index([date])
+}
+
+// ============ RECEIPT (Phase 2/3) ============
+model Receipt {
+  id        String   @id @default(cuid())
+  tenantId  String
+  userId    String
+  url       String
+  ocrText   String?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+}
+
+// ============ PLANS & SUBSCRIPTIONS (Phase 4) ============
+model Plan {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  price       Decimal  @db.Decimal(10, 2)
+  currency    String   @default("USD")
+  interval    String   // monthly | yearly
+  scanLimit   Int?     // null = unlimited
+  features    Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Subscription {
+  id        String    @id @default(cuid())
+  tenantId  String
+  planId    String
+  status    String    // active | cancelled | expired | trial
+  startAt   DateTime
+  endAt     DateTime?
+  trialEnd  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([tenantId])
+}
+
+// ============ AI LOGS (Phase 3/4 - usage tracking) ============
+model AiLog {
+  id        String   @id @default(cuid())
+  tenantId  String
+  userId    String
+  action    String   // receipt_parse | categorize | insights
+  model     String   @default("gemini")
+  tokensIn  Int?
+  tokensOut Int?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([userId])
+}
