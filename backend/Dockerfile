@@ -7,8 +7,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install all deps (dev needed for tsc build)
-RUN npm ci
+# Install all deps including dev (needed for tsc build)
+RUN npm install
 
 # Generate Prisma client (no DB needed)
 RUN npx prisma generate

@@ -1,0 +1,7 @@
+# Railway deployment config
+# In Railway: set Root Directory = backend
+
+[deploy]
+startCommand = "npx prisma migrate deploy && node dist/index.js"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

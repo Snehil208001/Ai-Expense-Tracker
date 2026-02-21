@@ -1,12 +1,16 @@
-# Railway/Nixpacks build config
+# Railway/Nixpacks build config (fallback if Dockerfile not used)
+# Install with devDeps for TypeScript build
 [phases.setup]
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm install --include=dev"]
 
 [phases.build]
 cmds = ["npx prisma generate", "npm run build"]
 
 [start]
 cmd = "npx prisma migrate deploy && node dist/index.js"
+
+[variables]
+NODE_ENV = "production"

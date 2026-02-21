@@ -109,9 +109,6 @@ export async function expenseRoutes(app: FastifyInstance) {
           orderBy: { date: "desc" },
           skip,
           take: limit,
-          include: {
-            // category relation not in schema - we'd need to add it. For now just return categoryId
-          },
         }),
         prisma.expense.count({ where }),
       ]);
