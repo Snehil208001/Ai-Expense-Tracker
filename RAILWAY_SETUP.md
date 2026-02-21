@@ -1,6 +1,8 @@
 # Railway DATABASE_URL Setup – Fix "empty string" Error
 
-Your app is failing because `DATABASE_URL` is not set. Add it in the Railway dashboard:
+Your app is failing because `DATABASE_URL` is not set **on Railway**.
+
+**Important:** Your local `backend/.env` file is **not** deployed (it's in `.gitignore`). Also, `localhost` in a connection string will not work on Railway—the app runs in the cloud and cannot reach your machine. You must use **Railway's PostgreSQL** database and set the variable in the Railway dashboard.
 
 ## Step-by-step
 
@@ -28,10 +30,10 @@ ${{expense-tracker-db.DATABASE_URL}}
 ```
 Replace `expense-tracker-db` with your actual PostgreSQL service name (check the left sidebar).
 
-#### Option C: Copy from database
-1. Click your **PostgreSQL** service
-2. Open **Variables** or **Connect**
-3. Copy the full `DATABASE_URL` value (starts with `postgresql://`)
+#### Option C: Copy from Railway's PostgreSQL
+1. Click your **PostgreSQL** service (e.g. `expense-tracker-db`) in the left sidebar
+2. Open **Variables** or **Connect** tab
+3. Copy the full `DATABASE_URL` value (starts with `postgresql://`—it will have Railway's host, not localhost)
 4. In **Ai-Expense-Tracker** → **Variables**, add:
    - Name: `DATABASE_URL`
    - Value: paste the copied URL
@@ -42,3 +44,24 @@ Replace `expense-tracker-db` with your actual PostgreSQL service name (check the
 
 ### 4. Check
 After redeploy, the logs should show Prisma connecting instead of "empty string".
+
+---
+
+## Troubleshooting
+
+**"I added it but still get empty string"**
+- Add the variable to the **Ai-Expense-Tracker service** Variables (click the service name → Variables), not only Shared Variables
+- Ensure you're in the correct **environment** (e.g. production)
+- After adding, trigger a **Redeploy**—variables don't apply to already-running containers
+
+**"I don't have a PostgreSQL service on Railway"**
+- In your project → **+ New** → **Database** → **PostgreSQL**
+- Railway will create it. Then add `DATABASE_URL` as a reference from that service
+
+**"Application failed to respond" / 502 Bad Gateway**
+- Check **Deploy Logs** (expense-tracker-api → Deployments → latest → Logs)
+- Ensure these variables are set on **expense-tracker-api**:
+  - `DATABASE_URL` = `${{expense-tracker-db.DATABASE_URL}}` (reference)
+  - `JWT_SECRET` = any string **16+ characters** (e.g. `my-super-secret-jwt-key-12345`)
+  - `NODE_ENV` = `production` (optional; Railway may set it)
+- Railway sets `PORT` automatically—do not override it

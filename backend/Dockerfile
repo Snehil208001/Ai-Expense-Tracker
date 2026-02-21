@@ -26,5 +26,8 @@ RUN npm run build
 # Create uploads dir
 RUN mkdir -p uploads
 
-# Run migrations then start (DATABASE_URL from Fly secrets at runtime)
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+# Copy and use startup script (helps debug env on Railway)
+COPY start.sh ./
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
