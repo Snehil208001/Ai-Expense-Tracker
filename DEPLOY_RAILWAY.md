@@ -24,11 +24,14 @@ Railway offers $5/month free credit—no credit card required for trial.
    - `JWT_SECRET` = any string 16+ chars (e.g. `my-super-secret-key-12345`)
    - `GOOGLE_GEMINI_API_KEY` = your [Gemini key](https://aistudio.google.com/apikey) (optional)
 
-### 4. Build Settings
+### 4. Build Settings (IMPORTANT – fixes Railpack / start.sh errors)
 
-- **Root Directory** = `backend` (required)
-- **Do NOT set a custom Build Command** – Railway uses the Dockerfile which has Node.js
-- If you see "npm: not found", remove any Build Command override in Settings → Build
+1. Click **Ai-Expense-Tracker** service → **Settings** → **Build**
+2. **Root Directory:** Set to `backend` (Railway will use `backend/Dockerfile`)
+3. **Builder:** If shown, select **Dockerfile** (not Nixpacks/Railpack)
+4. **Build Command:** Leave empty – the Dockerfile handles the build
+5. **Watch Paths:** Leave default
+6. If you see "Railpack could not determine" or "npm: not found", the Root Directory or Builder is wrong – set Root Directory to `backend` and ensure Dockerfile builder is used
 
 ### 5. Deploy & Get URL
 
