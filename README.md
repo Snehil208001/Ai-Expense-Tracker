@@ -50,12 +50,14 @@ npx expo start
 
 ## Deploy Backend
 
-| Platform | Free tier | Notes |
-|----------|-----------|-------|
+| Option | Cost | Notes |
+|--------|------|-------|
+| **Local + ngrok** | Free | Run backend on your PC, expose with ngrok. See [RUN_LOCAL_FOR_TESTING.md](RUN_LOCAL_FOR_TESTING.md) |
+| [Render](https://render.com) | Free tier | May require card. See [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |
 | [Railway](https://railway.app) | $5 credit/mo | No card for trial. See [DEPLOY_RAILWAY.md](DEPLOY_RAILWAY.md) |
-| [Koyeb](https://koyeb.com) | Free tier | No card required. See [DEPLOY_KOYEB.md](DEPLOY_KOYEB.md) |
 | [Fly.io](https://fly.io) | Free tier | Requires payment method. See [FLY_DEPLOY.md](FLY_DEPLOY.md) |
-| [Render](https://render.com) | Free tier | See [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |
+
+**For free testing without any cloud:** Use [RUN_LOCAL_FOR_TESTING.md](RUN_LOCAL_FOR_TESTING.md) (backend + ngrok on your PC).
 
 After deploy, update `mobile-expo/src/config/api.ts` with your API URL.
 
