@@ -12,15 +12,23 @@ Railway offers $5/month free credit—no credit card required for trial.
 4. **Root Directory:** Leave **empty** (uses root `Dockerfile`) OR set to `backend`
 5. Click **Deploy**
 
-### 2. Add PostgreSQL
+### 2. Add PostgreSQL & Link DATABASE_URL (CRITICAL)
 
 1. In your project → **+ New** → **Database** → **PostgreSQL**
-2. Railway creates the DB and sets `DATABASE_URL` automatically
+2. Railway creates a database service (e.g. `expense-tracker-db`)
+3. **Link DATABASE_URL to your backend:**
+   - Click your **Ai-Expense-Tracker** (backend) service
+   - Go to **Variables** tab
+   - Click **+ New Variable** → **Add a Reference**
+   - Select your **PostgreSQL** database service
+   - Choose **`DATABASE_URL`** from the dropdown
+   - Save
 
-### 3. Add Variables
+   If "Add Reference" is not available: Click the database service → **Connect** → copy the `DATABASE_URL` → paste it as a variable in your backend service.
 
-1. Click your **backend service** → **Variables**
-2. Add:
+### 3. Add Other Variables
+
+1. In your **backend service** → **Variables**, also add:
    - `JWT_SECRET` = any string 16+ chars (e.g. `my-super-secret-key-12345`)
    - `GOOGLE_GEMINI_API_KEY` = your [Gemini key](https://aistudio.google.com/apikey) (optional)
 

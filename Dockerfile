@@ -2,6 +2,9 @@
 # Builds the backend from backend/
 FROM node:20-slim
 
+# Prisma requires OpenSSL
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Copy backend files

@@ -1,5 +1,8 @@
-# Fly.io Dockerfile for AI Expense Tracker backend
+# Fly.io / Railway Dockerfile for AI Expense Tracker backend
 FROM node:20-slim
+
+# Prisma requires OpenSSL
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
