@@ -9,7 +9,7 @@ Railway offers $5/month free credit—no credit card required for trial.
 1. Go to [railway.app](https://railway.app) → **Login** (GitHub)
 2. **New Project** → **Deploy from GitHub repo**
 3. Select `Snehil208001/Ai-Expense-Tracker`
-4. **Important:** Click the service → **Settings** → set **Root Directory** to `backend`
+4. **Root Directory:** Leave **empty** (uses root `Dockerfile`) OR set to `backend`
 5. Click **Deploy**
 
 ### 2. Add PostgreSQL
