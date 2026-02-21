@@ -59,9 +59,10 @@ After redeploy, the logs should show Prisma connecting instead of "empty string"
 - Railway will create it. Then add `DATABASE_URL` as a reference from that service
 
 **"Application failed to respond" / 502 Bad Gateway**
-- Check **Deploy Logs** (expense-tracker-api → Deployments → latest → Logs)
+- Check **Deploy Logs** (expense-tracker-api → Deployments → latest → Logs) for `[start]` messages
 - Ensure these variables are set on **expense-tracker-api**:
   - `DATABASE_URL` = `${{expense-tracker-db.DATABASE_URL}}` (reference)
   - `JWT_SECRET` = any string **16+ characters** (e.g. `my-super-secret-jwt-key-12345`)
   - `NODE_ENV` = `production` (optional; Railway may set it)
-- Railway sets `PORT` automatically—do not override it
+- Railway sets `PORT` automatically—**do not override it**
+- **Networking:** expense-tracker-api → **Settings** → **Networking** → ensure **Target Port** matches your app (default: `3000`, or leave blank to use Railway's `PORT`)

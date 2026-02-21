@@ -11,4 +11,5 @@ echo "JWT_SECRET set: $(test -n "$JWT_SECRET" && echo yes || echo NO)"
 
 # Run migrations then start
 npx prisma migrate deploy
+echo "Migrations done, starting Node..."
 exec node dist/index.js

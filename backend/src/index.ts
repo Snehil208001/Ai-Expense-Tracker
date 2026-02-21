@@ -14,9 +14,14 @@ import { receiptRoutes } from "./routes/receipt.js";
 import { aiRoutes } from "./routes/ai.js";
 
 async function main() {
+  console.log("[start] Loading env...");
   const env = loadEnv();
+  console.log("[start] Env OK, PORT=" + env.PORT);
 
   const app = Fastify({ logger: true });
+
+  // Root health (for Railway/proxy checks)
+  app.get("/", async () => ({ ok: true, service: "expense-tracker-api" }));
 
   // Plugins
   await app.register(cors, { origin: true });
@@ -65,8 +70,9 @@ async function main() {
   process.on("SIGINT", shutdown);
   process.on("SIGTERM", shutdown);
 
+  console.log("[start] Listening on 0.0.0.0:" + env.PORT);
   await app.listen({ port: env.PORT, host: "0.0.0.0" });
-  console.log(`🚀 Server running at http://localhost:${env.PORT}`);
+  console.log(`🚀 Server running at http://0.0.0.0:${env.PORT}`);
   console.log(`   Health: http://localhost:${env.PORT}/api/health`);
 }
 
