@@ -13,6 +13,8 @@ import { expenseRoutes } from "./routes/expense.js";
 import { receiptRoutes } from "./routes/receipt.js";
 import { aiRoutes } from "./routes/ai.js";
 
+console.log("[boot] Starting...");
+
 async function main() {
   console.log("[start] Loading env...");
   const env = loadEnv();
@@ -77,6 +79,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err);
+  console.error("FATAL:", err);
+  if (err?.message) console.error("Message:", err.message);
+  if (err?.stack) console.error("Stack:", err.stack);
   process.exit(1);
 });
