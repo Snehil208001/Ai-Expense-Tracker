@@ -20,4 +20,8 @@ COPY backend/src ./src/
 RUN npm run build
 RUN mkdir -p uploads
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+# Use startup script (env logging, migrations, then server)
+COPY backend/start.sh ./
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
