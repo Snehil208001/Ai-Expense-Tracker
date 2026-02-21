@@ -48,18 +48,15 @@ Edit `src/config/api.ts` – set `DEV_HOST` to your machine's IP (e.g. `192.168.
 npx expo start
 ```
 
-## Deploy to Render
+## Deploy Backend
 
-Deploy the backend to [Render](https://render.com) for always-on API access:
+| Platform | Free tier | Notes |
+|----------|-----------|-------|
+| [Railway](https://railway.app) | $5 credit/mo | No card for trial. See [DEPLOY_RAILWAY.md](DEPLOY_RAILWAY.md) |
+| [Fly.io](https://fly.io) | Free tier | Requires payment method. See [FLY_DEPLOY.md](FLY_DEPLOY.md) |
+| [Render](https://render.com) | Free tier | See [DEPLOY_RENDER.md](DEPLOY_RENDER.md) |
 
-1. Push this repo to GitHub
-2. Go to [Render Blueprints](https://dashboard.render.com/blueprints)
-3. New Blueprint → Connect `Snehil208001/Ai-Expense-Tracker`
-4. Apply (creates PostgreSQL + Web Service)
-5. Add `GOOGLE_GEMINI_API_KEY` in Environment
-6. Update `mobile-expo/src/config/api.ts` with your Render URL
-
-See [DEPLOY_RENDER.md](DEPLOY_RENDER.md) for details.
+After deploy, update `mobile-expo/src/config/api.ts` with your API URL.
 
 ## Tech Stack
 
